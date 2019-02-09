@@ -1,8 +1,0 @@
-nginx-ingress:
-  rbac:
-   create: true
-  controller:
-    service:
-      type: ClusterIP
-    kind: DaemonSet
-    hostNetwork: true
