@@ -14,20 +14,3 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.11.0/Docume
 # Make master node a running worker node too!
 # FIXME: Use taint tolerations instead in the future
 kubectl taint nodes --all node-role.kubernetes.io/master-
-
-# Install helm
-curl https://storage.googleapis.com/kubernetes-helm/helm-v2.8.0-linux-amd64.tar.gz | tar xvz
-mv linux-amd64/helm /usr/local/bin
-rm -rf linux-amd64
-
-kubectl --namespace kube-system create sa tiller
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
-helm init --service-account tiller
-kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
-
-# Wait for tiller to be ready!
-kubectl rollout status --namespace=kube-system deployment/tiller-deploy --watch
-
-# Install nginx and other support stuff!
-cd support && helm dep up && cd ..
-helm install --name=support --namespace=support support/
