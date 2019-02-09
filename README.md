@@ -47,7 +47,7 @@ You must have ssh access to all the nodes. You also need root :)
 1. Install the pre-requisites for starting the master:
 
    ```bash
-   git clone https://github.com/data-8/kubeadm-bootstrap
+   git clone https://github.com/uweenukr/kubeadm-bootstrap
    cd kubeadm-bootstrap
    sudo ./install-kubeadm.bash
    ```
@@ -121,7 +121,7 @@ as a Kubernetes master for other nodes!
 2. On the worker node you want to join to the cluster, install the
    pre-requisites:
    ```bash
-   git clone https://github.com/data-8/kubeadm-bootstrap
+   git clone https://github.com/uweenukr/kubeadm-bootstrap
    cd kubeadm-bootstrap
    sudo ./install-kubeadm.bash
    ```
